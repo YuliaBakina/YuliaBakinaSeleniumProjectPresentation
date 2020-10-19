@@ -1,4 +1,4 @@
-package com.selenium.tests.object;
+package com.selenium.tests.model;
 
 public class Bureau {
     private String searchBureauName;

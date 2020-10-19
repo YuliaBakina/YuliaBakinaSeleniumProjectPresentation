@@ -1,7 +1,6 @@
 package com.selenium.tests.test;
 
-import com.selenium.tests.TestBase;
-import com.selenium.tests.object.Bureau;
+import com.selenium.tests.model.Bureau;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -13,8 +12,8 @@ public class SearchBureausOnSiteTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() throws InterruptedException {
-        isMainPageOpened();
-        delay(2000);
+        appManager.getMainPage().isMainPageOpened();
+        appManager.getMainPage().delay(2000);
     }
 
     @Test(enabled = true)
@@ -22,14 +21,14 @@ public class SearchBureausOnSiteTests extends TestBase {
         System.out.println("Search bar test begins");
 
         //send searching info into the search bar
-        typeInSearchBar(bureau);
+        appManager.getMainPage().typeInSearchBar(bureau);
 
-        delay(2000);
+        appManager.getMainPage().delay(2000);
 
-        clickSearchSuggestion();
+        appManager.getMainPage().clickSearchSuggestion();
 
         //check if the right page is opened
-        isRightPageOpened(bureau);
+        appManager.getBureauPage().isRightPageOpened(bureau);
 
         System.out.println("Search bar test ends");
     }
@@ -39,22 +38,22 @@ public class SearchBureausOnSiteTests extends TestBase {
         System.out.println("Filters test begins");
 
         //open filters page
-        clickReceptionPointsTabInNavMenu();
-        isReseptionPointsPageOpened();
+        appManager.getMainPage().clickReceptionPointsTabInNavMenu();
+        appManager.getReceptionPoints().isReseptionPointsPageOpened();
 
         //send searching info into the filters
-        setFilterByBureauName(bureau);
-        setFilterByAddress(bureau);
+        appManager.getReceptionPoints().setFilterByBureauName(bureau);
+        appManager.getReceptionPoints().setFilterByAddress(bureau);
 
-        delay(2000);
+        appManager.getReceptionPoints().delay(2000);
 
         //choose the filters result
-        openPageFromSearchResults(bureau);
+        appManager.getReceptionPoints().openPageFromSearchResults(bureau);
 
-        delay(2000);
+        appManager.getReceptionPoints().delay(2000);
 
         //check the right page is opened
-        isRightPageOpened(bureau);
+        appManager.getBureauPage().isRightPageOpened(bureau);
 
         System.out.println("Filter test ends");
 
